@@ -174,7 +174,7 @@ module Kumogata2::CLI
         options[:aws][:credentials] = credentials
       end
 
-      Aws.config.update(options[:aws].dup)
+      options[:aws].each {|k,v| Aws.config[k.to_sym] = v }
       options = Hashie::Mash.new(options)
 
       String.colorize = options.color?
